@@ -3,7 +3,13 @@ from airflow.decorators import dag, task
 from datetime import datetime
 
 # Define the DAG
-@dag(schedule='*/2 * * * *', start_date=datetime(2024, 1, 1), catchup=False)
+@dag(
+    schedule='*/2 * * * *',
+    start_date=datetime(2024, 1, 1),
+    catchup=False,
+    tags=["datasets"]
+)
+
 def update_dataset1():
     # Define the tasks using decorators
     @task(outlets=[Dataset("dataset1a")])

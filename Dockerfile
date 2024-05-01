@@ -1,6 +1,8 @@
-FROM apache/airflow:2.8.4-python3.11
-
-USER airflow
+ARG AIRFLOW_VERSION=${AIRFLOW_VERSION}
+ARG PYTHON_VERSION=${PYTHON_VERSION}
+ARG AIRFLOW_IMAGE_TAG=${AIRFLOW_VERSION}-python${PYTHON_VERSION}
+FROM apache/airflow:$AIRFLOW_IMAGE_TAG
+ARG AIRFLOW_VERSION
 WORKDIR /opt/airflow
 ADD requirements.txt .
-RUN pip install apache-airflow==2.8.4 -r requirements.txt
+RUN pip install apache-airflow==${AIRFLOW_VERSION} -r requirements.txt
